@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="{% url 'home' %}" class="logo">Todo</a>
+            <nav class="nav">
+                <a href="{% url 'home' %}"> <i class="bi bi-house-fill"></i> Home</a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'tasks' %}"> <i class="bi bi-list-task"></i> My Tasks</a>
+                    <a href="{% url 'task-create' %}"> <i class="bi bi-plus-circle"></i> Create Task</a>
+                    <a href="#">Hi {{ request.user|title }}</a>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-outline" value="Logout">
+                    </form>
+                    <!-- <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a> -->
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline">Log in</a>
+                    <a href="{% url 'register' %}">Sign Up</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header> 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <main>
+        <div class="container">
+            {% block content%}
+
+            {% endblock content%}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Create by <a href="#">Developer</a></p>
+        </div>
+    </footer>
+</body>
+</html>
