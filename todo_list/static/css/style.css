@@ -57,6 +57,12 @@ body {
   flex-direction: column;
 }
 
+.avatar{
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
 h1 {
   font-size: 2rem;
   line-height: 1.5;
