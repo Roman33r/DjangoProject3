@@ -8,6 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+    {% comment %} {% load cache %}
+
+    {% cache 60 menu %} {% endcomment %}
     <header class="header">
         <div class="container">
             <a href="{% url 'home' %}" class="logo">Todo</a>
@@ -29,6 +32,7 @@
             </nav>
         </div>
     </header> 
+    {% comment %} {% endcache %} {% endcomment %}
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{message.tags}}">
@@ -45,7 +49,7 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="container text-center">
             <p>Create by <a href="#">Developer</a></p>
         </div>
     </footer>
